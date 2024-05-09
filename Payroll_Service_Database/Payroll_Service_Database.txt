@@ -101,3 +101,37 @@ mysql> select * from employee_Payroll;
 +----+---------+--------+------------+
 5 rows in set (0.00 sec)
 
+
+
+
+============================================================================
+
+   UC5 Ability to retrieve salary data for a particular employee as well 
+	   as all employees who have joined in a particular data range.
+
+============================================================================
+
+
+
+mysql> select salary from employee_payroll
+    -> where name = "Vedant";
++--------+
+| salary |
++--------+
+|  25000 |
++--------+
+1 row in set (0.00 sec)
+
+
+
+mysql> select name,salary from employee_payroll
+    -> where start_date between cast('2000-01-01' as DATE) AND DATE(NOW());
++---------+--------+
+| name    | salary |
++---------+--------+
+| Vedant  |  25000 |
+| Vaibhav |   6000 |
+| Anjali  |  12000 |
++---------+--------+
+3 rows in set (0.00 sec)
+
