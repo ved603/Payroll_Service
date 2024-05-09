@@ -287,3 +287,37 @@ mysql> desc employee_payroll;
 8 rows in set (0.05 sec)
 
 
+
+
+
+============================================================================
+
+   UC9 extends table and add new columns as basic pay, income tax, 
+	deduction,net play, Taxable pay.
+
+============================================================================
+
+
+mysql>  Alter table employee_payroll ADD (Basic_Pay Integer, Deduction Integer, Taxable_pay Integer, Income_Tax Integer, Net_play Integer);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++----------------+-----------------+------+-----+-------------+----------------+
+| Field          | Type            | Null | Key | Default     | Extra          |
++----------------+-----------------+------+-----+-------------+----------------+
+| id             | bigint unsigned | NO   | PRI | NULL        | auto_increment |
+| name           | varchar(255)    | YES  |     | NULL        |                |
+| salary         | decimal(10,0)   | YES  |     | NULL        |                |
+| start_date     | date            | YES  |     | NULL        |                |
+| Gender         | varchar(8)      | YES  |     | NULL        |                |
+| employee_phone | mediumtext      | YES  |     | NULL        |                |
+| address        | varchar(255)    | YES  |     | navi-mumbai |                |
+| department     | varchar(255)    | NO   |     | NULL        |                |
+| Basic_Pay      | int             | YES  |     | NULL        |                |
+| Deduction      | int             | YES  |     | NULL        |                |
+| Taxable_pay    | int             | YES  |     | NULL        |                |
+| Income_Tax     | int             | YES  |     | NULL        |                |
+| Net_play       | int             | YES  |     | NULL        |                |
++----------------+-----------------+------+-----+-------------+----------------+
+13 rows in set (0.00 sec)
