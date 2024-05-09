@@ -1,8 +1,8 @@
-========================================================
+======================================================================
 
    UC1 Ability to create a payroll service database
 
-========================================================
+=======================================================================
 
 mysql> create database payroll_service;
 Query OK, 1 row affected (0.03 sec)
@@ -24,11 +24,11 @@ mysql> show databases;
 
 
 
-========================================================
+==========================================================================
 
    UC2 Ability to create a payroll service database
 
-========================================================
+==========================================================================
 
 
 
@@ -51,3 +51,30 @@ mysql> desc employee_payroll;
 | start_date | date            | YES  |     | NULL    |                |
 +------------+-----------------+------+-----+---------+----------------+
 4 rows in set (0.02 sec)
+
+
+
+
+============================================================================
+
+   UC3 Ability to create employee payroll data in the payroll service.
+
+============================================================================
+
+
+
+
+Insert into employee_payroll (name, salary, start_date)values("Vedant",25000,'2002-11-22');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> Insert into employee_payroll (name, salary, start_date)values("Tushar",21000,'1997-08-03');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into employee_payroll (name, salary, start_date)values("Vaibhav",6000,'2003-02-01');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into employee_payroll (name, salary, start_date)values("Sayali",30000,'1996-03-05');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into employee_payroll (name, salary, start_date)values("Anjali",12000,'2002-09-16');
+Query OK, 1 row affected (0.01 sec)
