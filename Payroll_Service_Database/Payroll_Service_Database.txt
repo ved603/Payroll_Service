@@ -22,3 +22,32 @@ mysql> show databases;
 +--------------------+
 7 rows in set (0.00 sec)
 
+
+
+========================================================
+
+   UC2 Ability to create a payroll service database
+
+========================================================
+
+
+
+mysql> CREATE TABLE employee_payroll (
+    ->     id SERIAL PRIMARY KEY,
+    ->     name VARCHAR(255),
+    ->     salary NUMERIC,
+    ->     start_date DATE
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+
+mysql> desc employee_payroll;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255)    | YES  |     | NULL    |                |
+| salary     | decimal(10,0)   | YES  |     | NULL    |                |
+| start_date | date            | YES  |     | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
