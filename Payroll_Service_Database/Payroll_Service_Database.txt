@@ -253,3 +253,37 @@ mysql> select count(name) from employee_Payroll where Gender = 'female';
 1 row in set (0.00 sec)
 
 
+
+
+
+============================================================================
+
+   UC8 extends table and add new columns as address, department, phone.
+
+============================================================================
+
+
+
+
+ Alter table employee_payroll ADD (employee_phone long, address varchar(255) DEFAULT 'navi-mumbai', department varchar(255) NOT NULL);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+mysql> desc employee_payroll;
++----------------+-----------------+------+-----+-------------+----------------+
+| Field          | Type            | Null | Key | Default     | Extra          |
++----------------+-----------------+------+-----+-------------+----------------+
+| id             | bigint unsigned | NO   | PRI | NULL        | auto_increment |
+| name           | varchar(255)    | YES  |     | NULL        |                |
+| salary         | decimal(10,0)   | YES  |     | NULL        |                |
+| start_date     | date            | YES  |     | NULL        |                |
+| Gender         | varchar(8)      | YES  |     | NULL        |                |
+| employee_phone | mediumtext      | YES  |     | NULL        |                |
+| address        | varchar(255)    | YES  |     | navi-mumbai |                |
+| department     | varchar(255)    | NO   |     | NULL        |                |
++----------------+-----------------+------+-----+-------------+----------------+
+8 rows in set (0.05 sec)
+
+
