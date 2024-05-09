@@ -78,3 +78,26 @@ Query OK, 1 row affected (0.01 sec)
 
 mysql> Insert into employee_payroll (name, salary, start_date)values("Anjali",12000,'2002-09-16');
 Query OK, 1 row affected (0.01 sec)
+
+
+
+============================================================================
+
+   UC4 Ability to retrieve all the employee payroll data.
+
+============================================================================
+
+
+
+mysql> select * from employee_Payroll;
++----+---------+--------+------------+
+| id | name    | salary | start_date |
++----+---------+--------+------------+
+|  1 | Vedant  |  25000 | 2002-11-22 |
+|  2 | Tushar  |  21000 | 1997-08-03 |
+|  3 | Vaibhav |   6000 | 2003-02-01 |
+|  4 | Sayali  |  30000 | 1996-03-05 |
+|  5 | Anjali  |  12000 | 2002-09-16 |
++----+---------+--------+------------+
+5 rows in set (0.00 sec)
+
