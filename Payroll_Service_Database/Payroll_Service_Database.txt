@@ -135,3 +135,47 @@ mysql> select name,salary from employee_payroll
 +---------+--------+
 3 rows in set (0.00 sec)
 
+
+
+
+============================================================================
+
+   UC6 Ability to Add new Column and Refactor the Data Accordingly.
+
+============================================================================
+
+
+
+
+
+mysql> Alter table employee_Payroll
+    -> ADD Gender varchar(5);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+mysql> update employee_Payroll set Gender = "male" where name = "Vedant" or name = "Vaibhav" or name = "Tushar";
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+
+
+mysql> update employee_Payroll set Gender = "Female" where name = "Sayali" or name="anjali";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+
+mysql> select * from employee_Payroll;
++----+---------+--------+------------+--------+
+| id | name    | salary | start_date | Gender |
++----+---------+--------+------------+--------+
+|  1 | Vedant  |  25000 | 2002-11-22 | male   |
+|  2 | Tushar  |  21000 | 1997-08-03 | male   |
+|  3 | Vaibhav |   6000 | 2003-02-01 | male   |
+|  4 | Sayali  |  30000 | 1996-03-05 | Female |
+|  5 | Anjali  |  12000 | 2002-09-16 | Female |
++----+---------+--------+------------+--------+
+5 rows in set (0.00 sec)
+
+
