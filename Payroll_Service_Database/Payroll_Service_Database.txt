@@ -342,5 +342,258 @@ mysql> select * from employee_payroll where name = 'vedant';
 1 row in set (0.00 sec)
 
 
+ 
 
 
+
+============================================================================
+
+   UC11 Implement the ER Diagram into Payroll Service DB
+
+============================================================================
+
+
+
+
+
+select * from employee_payroll;
++----+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+
+| id | name    | salary | start_date | Gender | employee_phone | address   | department | Basic_Pay | Deduction | Taxable_pay | Income_Tax | Net_play |
++----+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+
+|  1 | Vedant  |  25000 | 2002-11-22 | male   | 9145526100     | chopda    | automation |     15000 |      3000 |         100 |        200 |      300 |
+|  2 | Tushar  |  21000 | 1997-08-03 | male   | 7400441210     | Ghatkopar | Insurance  |     10000 |      7000 |          10 |         20 |      700 |
+|  3 | Vaibhav |   6000 | 2003-02-01 | male   | 7400456789     | Govandi   | Banking    |    100000 |      9000 |         500 |         40 |      600 |
+|  4 | Sayali  |  30000 | 1996-03-05 | Female | 1234567891     | Nerul     | Insurance  |      8000 |       900 |        1500 |        400 |      400 |
+|  5 | Anjali  |  12000 | 2002-09-16 | Female | 9876543211     | Ghansoli  | Automation |     19000 |      1900 |        2500 |        400 |      350 |
++----+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+
+5 rows in set (0.02 sec)
+
+
+
+mysql> insert into Department_Payroll values(101,'automation');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Department_Payroll values(102,'performace');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Department_Payroll values(103,'Insurance');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Department_Payroll values(104,'Banking');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Department_Payroll values(105,'automation');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Department_Payroll;
++-----+------------+
+| did | dname      |
++-----+------------+
+| 101 | automation |
+| 102 | performace |
+| 103 | Insurance  |
+| 104 | Banking    |
+| 105 | automation |
++-----+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+CREATE TABLE Employee_Department (
+    eid SERIAL,
+    did INTEGER,
+    FOREIGN KEY (eid) REFERENCES employee_payroll(id),
+    FOREIGN KEY (did) REFERENCES department_payroll(did),
+    PRIMARY KEY (eid, did)
+);
+
+
+mysql> select * from Employee_Department;
+Empty set (0.00 sec)
+
+mysql> insert Employee_Department(did) values(101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert Employee_Department(did) values(102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert Employee_Department(did) values(103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert Employee_Department(did) values(104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert Employee_Department(did) values(105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Employee_Department;
++-----+-----+
+| eid | did |
++-----+-----+
+|   1 | 101 |
+|   2 | 102 |
+|   3 | 103 |
+|   4 | 104 |
+|   5 | 105 |
++-----+-----+
+
+
+
+
+============================================================================
+
+   UC11 Implement the ER Diagram into Payroll Service DB
+
+============================================================================
+
+
+
+
+select * from employee_payroll  Left Join Employee_department on employee_payroll.id = Employee_department.eid Union select * from employee_payroll Right Join Employee_Department  on employee_payroll.id = Employee_Department.eid;
++------+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+------+------+
+| id   | name    | salary | start_date | Gender | employee_phone | address   | department | Basic_Pay | Deduction | Taxable_pay | Income_Tax | Net_play | eid  | did  |
++------+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+------+------+
+|    1 | Vedant  |  25000 | 2002-11-22 | male   | 9145526100     | chopda    | automation |     15000 |      3000 |         100 |        200 |      300 |    1 |  101 |
+|    2 | Tushar  |  21000 | 1997-08-03 | male   | 7400441210     | Ghatkopar | Insurance  |     10000 |      7000 |          10 |         20 |      700 |    2 |  102 |
+|    3 | Vaibhav |   6000 | 2003-02-01 | male   | 7400456789     | Govandi   | Banking    |    100000 |      9000 |         500 |         40 |      600 |    3 |  103 |
+|    4 | Sayali  |  30000 | 1996-03-05 | Female | 1234567891     | Nerul     | Insurance  |      8000 |       900 |        1500 |        400 |      400 |    4 |  104 |
+|    5 | Anjali  |  12000 | 2002-09-16 | Female | 9876543211     | Ghansoli  | Automation |     19000 |      1900 |        2500 |        400 |      350 |    5 |  105 |
++------+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+------+------+
+5 rows in set (0.04 sec)
+
+
+
+============================================================================
+
+   UC12 Retrive the Data from the Database and perform CURD operations.
+
+============================================================================
+
+
+
+SELECT ep.*, dp.* FROM Employee_department ed 
+LEFT JOIN employee_payroll ep ON ed.eid = ep.id 
+LEFT JOIN department_payroll dp ON ed.did = dp.did;
+
++------+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+| id   | name    | salary | start_date | Gender | employee_phone | address   | department | Basic_Pay | Deduction | Taxable_pay | Income_Tax | Net_play | did  | dname      |
++------+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+|    1 | Vedant  |  25000 | 2002-11-22 | male   | 9145526100     | chopda    | automation |     15000 |      3000 |         100 |        200 |      300 |  101 | automation |
+|    2 | Tushar  |  21000 | 1997-08-03 | male   | 7400441210     | Ghatkopar | Insurance  |     10000 |      7000 |          10 |         20 |      700 |  102 | performace |
+|    3 | Vaibhav |   6000 | 2003-02-01 | male   | 7400456789     | Govandi   | Banking    |    100000 |      9000 |         500 |         40 |      600 |  103 | Insurance  |
+|    4 | Sayali  |  30000 | 1996-03-05 | Female | 1234567891     | Nerul     | Insurance  |      8000 |       900 |        1500 |        400 |      400 |  104 | Banking    |
+|    5 | Anjali  |  12000 | 2002-09-16 | Female | 9876543211     | Ghansoli  | Automation |     19000 |      1900 |        2500 |        400 |      350 |  105 | automation |
++------+---------+--------+------------+--------+----------------+-----------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+ SELECT ep.*, dp.* FROM Employee_department ed
+    -> LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    -> LEFT JOIN department_payroll dp ON ed.did = dp.did
+    -> where ep.name = "Vedant";
+
++------+--------+--------+------------+--------+----------------+---------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+| id   | name   | salary | start_date | Gender | employee_phone | address | department | Basic_Pay | Deduction | Taxable_pay | Income_Tax | Net_play | did  | dname      |
++------+--------+--------+------------+--------+----------------+---------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+|    1 | Vedant |  25000 | 2002-11-22 | male   | 9145526100     | chopda  | automation |     15000 |      3000 |         100 |        200 |      300 |  101 | automation |
++------+--------+--------+------------+--------+----------------+---------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+1 row in set (0.01 sec)
+
+
+
+
+mysql>  SELECT ep.*, dp.* FROM Employee_department ed
+    ->     LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    ->     LEFT JOIN department_payroll dp ON ed.did = dp.did
+    ->     where ep.start_date between cast('2000-01-01' as DATE) AND DATE(NOW());
++------+---------+--------+------------+--------+----------------+----------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+| id   | name    | salary | start_date | Gender | employee_phone | address  | department | Basic_Pay | Deduction | Taxable_pay | Income_Tax | Net_play | did  | dname      |
++------+---------+--------+------------+--------+----------------+----------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+|    1 | Vedant  |  25000 | 2002-11-22 | male   | 9145526100     | chopda   | automation |     15000 |      3000 |         100 |        200 |      300 |  101 | automation |
+|    3 | Vaibhav |   6000 | 2003-02-01 | male   | 7400456789     | Govandi  | Banking    |    100000 |      9000 |         500 |         40 |      600 |  103 | Insurance  |
+|    5 | Anjali  |  12000 | 2002-09-16 | Female | 9876543211     | Ghansoli | Automation |     19000 |      1900 |        2500 |        400 |      350 |  105 | automation |
++------+---------+--------+------------+--------+----------------+----------+------------+-----------+-----------+-------------+------------+----------+------+------------+
+3 rows in set (0.00 sec)
+
+
+SUM, AVG, MIN, MAX, COUNT
+
+
+
+mysql> SELECT ep.gender,SUM(ep.salary) AS total_salary
+    -> FROM Employee_department ed
+    -> LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    -> LEFT JOIN department_payroll dp ON ed.did = dp.did
+    -> Group by Gender;
++--------+--------------+
+| gender | total_salary |
++--------+--------------+
+| male   |        52000 |
+| Female |        42000 |
++--------+--------------+
+2 rows in set (0.00 sec)
+
+
+
+
+mysql>  SELECT ep.gender,AVG(ep.salary) AS total_salary
+    ->         FROM Employee_department ed
+    ->         LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    ->         LEFT JOIN department_payroll dp ON ed.did = dp.did
+    ->         Group by Gender;
++--------+--------------+
+| gender | total_salary |
++--------+--------------+
+| male   |   17333.3333 |
+| Female |   21000.0000 |
++--------+--------------+
+2 rows in set (0.00 sec)
+
+
+
+
+mysql> SELECT ep.gender,MIN(ep.salary) AS total_salary
+    ->         FROM Employee_department ed
+    ->         LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    ->         LEFT JOIN department_payroll dp ON ed.did = dp.did
+    ->         Group by Gender;
++--------+--------------+
+| gender | total_salary |
++--------+--------------+
+| male   |         6000 |
+| Female |        12000 |
++--------+--------------+
+2 rows in set (0.01 sec)
+
+
+
+mysql> SELECT ep.gender,MAX(ep.salary) AS total_salary
+    ->         FROM Employee_department ed
+    ->         LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    ->         LEFT JOIN department_payroll dp ON ed.did = dp.did
+    ->         Group by Gender;
++--------+--------------+
+| gender | total_salary |
++--------+--------------+
+| male   |        25000 |
+| Female |        30000 |
++--------+--------------+
+2 rows in set (0.00 sec)
+
+
+
+mysql> SELECT ep.gender,Count(ep.gender) AS total_salary
+    ->         FROM Employee_department ed
+    ->         LEFT JOIN employee_payroll ep ON ed.eid = ep.id
+    ->         LEFT JOIN department_payroll dp ON ed.did = dp.did
+    ->         Group by Gender;
++--------+--------------+
+| gender | total_salary |
++--------+--------------+
+| male   |            3 |
+| Female |            2 |
++--------+--------------+
+2 rows in set (0.00 sec)
